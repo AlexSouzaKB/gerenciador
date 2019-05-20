@@ -20,16 +20,9 @@
 	</dependencies>
 	<build>
 		<finalName>gerenciador</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version> <!-- or whatever current version -->
-				<configuration>
-					<source>1.8.0_201</source>
-					<target>1.8.0_201</target>
-				</configuration>
-			</plugin>
-		</plugins>
+		<properties>
+			<maven.compiler.target>1.8</maven.compiler.target>
+			<maven.compiler.source>1.8</maven.compiler.source>
+    		</properties>
 	</build>
 </project>
