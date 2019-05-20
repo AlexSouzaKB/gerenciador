@@ -4,6 +4,6 @@
 %>
 <html>
 <body>
-Empresa  <% = nomeEmpresa; %>  cadastrada com sucesso!
+Empresa  <%  %>  cadastrada com sucesso!
 </body>
 </html>
