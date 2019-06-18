@@ -1,10 +1,14 @@
 package br.com.alura.gerenciador.modelo;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Empresa {
@@ -13,7 +17,18 @@ public class Empresa {
 	@SequenceGenerator(name="sequence_empresa", sequenceName="SEQ_EMPRESA", initialValue=1,allocationSize=1)
 	private Integer cnpf;
 	private String nome;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataAbertura;
 	
+	public Calendar getDataAbertura() {
+		return dataAbertura;
+	}
+	public void setDataAbertura(Calendar dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+	public void setCnpf(Integer cnpf) {
+		this.cnpf = cnpf;
+	}
 	public int getCnpf() {
 		return cnpf;
 	}

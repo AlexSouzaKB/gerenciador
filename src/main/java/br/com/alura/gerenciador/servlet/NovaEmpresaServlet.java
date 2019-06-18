@@ -1,9 +1,11 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,9 +29,21 @@ public class NovaEmpresaServlet extends HttpServlet{
 		System.out.println("Cadastrando uma nova empresa");
 		
 		Empresa empresa = new Empresa();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar dataCriacao = Calendar.getInstance();
+		
+		try {
+			dataCriacao.setTime(sdf.parse(request.getParameter("data")));
+		} catch (ParseException e) {
+			throw new ServletException(e);
+		}
+			
+		empresa.setDataAbertura(dataCriacao);
 		empresa.setNome(request.getParameter("nome"));
 		
-		EntityManager em = new JPAUtil().getEntityManager();
+		
+		EntityManager em = JPAUtil.getEntityManager();
 		
 		try {
 			EmpresaDAO dao = new EmpresaDAO(em);			
@@ -44,10 +58,10 @@ public class NovaEmpresaServlet extends HttpServlet{
 			System.out.println(e.getMessage());
 		}
 
+		request.setAttribute("empresa", empresa.getNome());
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
+		rd.forward(request, response);
 		
-		
-		PrintWriter out = response.getWriter();
-		out.print("<html><body>Empresa " + empresa.getNome() + " cadastrada com sucesso!</body></html>");
 		
 	}
 
